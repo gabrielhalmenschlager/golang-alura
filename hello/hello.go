@@ -75,12 +75,14 @@ func iniciarMonitoramento() {
 	fmt.Println(Magenta + "\n🚀 Iniciando monitoramento..." + Reset)
 	fmt.Println(Cyan + "---------------------------------" + Reset)
 
-	sites := [4]string{
-		"https://www.alura.com.br",
-		"https://www.google.com",
-		"https://www.github.com",
-		"https://www.udemy.com",
-	}
+	// sites := []string{
+	// 	"https://www.alura.com.br",
+	// 	"https://www.google.com",
+	// 	"https://www.github.com",
+	// 	"https://www.udemy.com",
+	// }
+
+	sites := leSitesDoArq()
 
 	for i, site := range sites {
 		fmt.Println(Blue, "\nTestando site", i+1, ":", site, Reset)
@@ -99,4 +101,14 @@ func testaSite(site string) {
 	} else {
 		fmt.Println(Red, "⚠️  Site:", site, "está com problemas. Status Code:", resp.StatusCode, Reset)
 	}
+}
+
+func leSitesDoArq() []string {
+
+	var sites []string
+
+	arquivo, _ := os.Open("sites.txt")
+	fmt.Println(arquivo)
+
+	return sites
 }
