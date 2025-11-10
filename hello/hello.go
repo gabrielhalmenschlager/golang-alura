@@ -52,9 +52,9 @@ func exibeIntroducao() {
 }
 
 func exibeMenu() {
-	fmt.Println(Blue + "=======================" + Reset)
-	fmt.Println(White + "      MENU PRINCIPAL" + Reset)
-	fmt.Println(Blue + "=======================" + Reset)
+	fmt.Println(Blue + "========================" + Reset)
+	fmt.Println(White + "     MENU PRINCIPAL" + Reset)
+	fmt.Println(Blue + "========================" + Reset)
 	fmt.Println(Cyan + "1" + Reset + " - Iniciar Monitoramento")
 	fmt.Println(Cyan + "2" + Reset + " - Exibir Logs")
 	fmt.Println(Cyan + "0" + Reset + " - Sair do Programa")
