@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
@@ -32,7 +33,7 @@ func main() {
 		case 1:
 			iniciarMonitoramento()
 		case 2:
-			fmt.Println(Yellow + "\n📜 Exibindo Logs..." + Reset)
+			imprimeLogs()
 		case 0:
 			fmt.Println(Red + "\nSaindo do Programa..." + Reset)
 			os.Exit(0)
@@ -142,7 +143,23 @@ func registraLog(site string, status bool) {
 		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
 	}
 
-	arquivo.WriteString(time.Now().Format("02/01/2006 15:04:05") + " - " + site + "- Online: " + strconv.FormatBool(status) + "\n")
+	arquivo.WriteString(
+		time.Now().Format("02/01/2006 15:04:05") +
+			" - " + site +
+			" - Online: " + strconv.FormatBool(status) + "\n")
 
 	arquivo.Close()
+}
+
+func imprimeLogs() {
+	arquivo, err := ioutil.ReadFile("hello/log.txt")
+	if err != nil {
+		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
+	}
+
+	fmt.Println(Cyan + "---------------------------------" + Reset)
+	fmt.Println(Magenta + "📄 LOGS DE MONITORAMENTO" + Reset)
+	fmt.Println(Cyan + "---------------------------------" + Reset)
+	fmt.Println(White + string(arquivo) + Reset)
+	fmt.Println(Cyan + "---------------------------------" + Reset)
 }
