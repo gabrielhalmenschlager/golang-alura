@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -22,7 +23,6 @@ var White = "\033[97m"
 
 func main() {
 	exibeIntroducao()
-
 	for {
 		exibeMenu()
 		comando := lerComando()
@@ -105,8 +105,10 @@ func testaSite(site string) {
 
 	if resp.StatusCode == 200 {
 		fmt.Println(Green, "✔️  Site:", site, "foi carregado com sucesso!", Reset)
+		registraLog(site, true)
 	} else {
 		fmt.Println(Red, "⚠️  Site:", site, "está com problemas. Status Code:", resp.StatusCode, Reset)
+		registraLog(site, false)
 	}
 }
 
@@ -131,4 +133,15 @@ func leSitesDoArq() []string {
 	}
 	arquivo.Close()
 	return sites
+}
+
+func registraLog(site string, status bool) {
+	arquivo, err := os.OpenFile("hello/log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		fmt.Println(Red, "⚠️ Ocorreu um erro", err, Reset)
+	}
+
+	arquivo.WriteString(site + "- Online: " + strconv.FormatBool(status) + "\n")
+
+	arquivo.Close()
 }
