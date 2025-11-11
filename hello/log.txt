@@ -1,0 +1,12 @@
+11/11/2025 15:42:53 - https://www.google.com- Online: true
+11/11/2025 15:42:54 - https://www.github.com- Online: true
+11/11/2025 15:42:54 - https://www.alura.com.br- Online: true
+11/11/2025 15:42:54 - https://www.udemy.com- Online: false
+11/11/2025 15:42:54 - https://www.fiap.com.br- Online: true
+11/11/2025 15:42:54 - https://www.senacrs.com.br- Online: true
+11/11/2025 15:43:04 - https://www.google.com- Online: true
+11/11/2025 15:43:04 - https://www.github.com- Online: true
+11/11/2025 15:43:04 - https://www.alura.com.br- Online: true
+11/11/2025 15:43:05 - https://www.udemy.com- Online: false
+11/11/2025 15:43:05 - https://www.fiap.com.br- Online: true
+11/11/2025 15:43:05 - https://www.senacrs.com.br- Online: true
