@@ -7,6 +7,14 @@ import (
 	"github.com/gabrielhalmenschlager/curso-golang-alura/banco/contas"
 )
 
+type verificarConta interface {
+	Sacar(valor float64) string
+}
+
+func pagarBoleto(conta verificarConta, valorDoBoleto float64) {
+	conta.Sacar(valorDoBoleto)
+}
+
 func main() {
 	clienteGabriel := clientes.Titular{
 		Nome:      "Gabriel",
@@ -32,4 +40,8 @@ func main() {
 
 	fmt.Println(contaDoGabriel)
 	fmt.Println(contaDoPedro)
+
+	contaDoGabriel.Depositar(500)
+	pagarBoleto(&contaDoGabriel, 100)
+	fmt.Println(contaDoGabriel.ObterSaldo())
 }
