@@ -10,15 +10,14 @@
             <p class="text-secondary" style="color: #a1b3c5;">Gerencie seus produtos com praticidade e estilo</p>
         </div>
 
-        <section class="card shadow-lg border-0" 
-                 style="background: linear-gradient(145deg, #12192c, #0f1423); border-radius: 15px;">
+        <section class="card shadow-lg border-0"
+            style="background: linear-gradient(145deg, #12192c, #0f1423); border-radius: 15px;">
             <div class="card-body p-4">
 
-                <div class="table-responsive" style="overflow-x: hidden;"> 
-                    <table class="table table-hover table-borderless align-middle mb-0" 
-                           style="color: #e3f2fd; white-space: normal;">
-                        <thead style="background: #1a2138;">
-                            <tr style="color: #4fc3f7;">
+                <div class="table-responsive" style="overflow-x: hidden;">
+                    <table class="table table-dark-custom table-hover table-borderless align-middle mb-0 w-100">
+                        <thead>
+                            <tr>
                                 <th><i class="bi bi-box-seam"></i> Nome</th>
                                 <th><i class="bi bi-card-text"></i> Descrição</th>
                                 <th><i class="bi bi-cash-stack"></i> Preço</th>
@@ -28,22 +27,23 @@
                         </thead>
                         <tbody>
                             {{range .}}
-                            <tr style="transition: all 0.3s;">
-                                <td>{{.Nome}}</td>
-                                <td>{{.Descricao}}</td>
-                                <td>R$ {{.Preco}}</td>
-                                <td>{{.Quantidade}}</td>
-                                <td class="text-center">
-                                    <a href="edit?id={{.Id}}" class="btn btn-sm d-inline-flex align-items-center gap-1"
-                                       style="background: #4fc3f7; color: #0a0f1f; border: none; transition: 0.3s;">
-                                        <i class="bi bi-pencil-square" style="margin-right: 8px;"></i> Editar
+                            <tr>
+                                <td class="py-2">{{.Nome}}</td>
+                                <td class="py-2">{{.Descricao}}</td>
+                                <td class="py-2">R$ {{.Preco}}</td>
+                                <td class="py-2">{{.Quantidade}}</td>
+                                <td class="text-center py-2">
+                                    <a href="edit?id={{.Id}}" class="btn btn-sm d-inline-flex align-items-center gap-2"
+                                        style="background: #4fc3f7; color: #0a0f1f; border: none; padding: 6px 12px; border-radius: 8px;">
+                                        <i class="bi bi-pencil-square"></i> Editar
                                     </a>
                                 </td>
-                                <td class="text-center">
-                                    <button onclick="onDelete('{{.Id}}')" 
-                                            class="btn btn-sm d-inline-flex align-items-center gap-1"
-                                            style="background: #ef5350; color: white; border: none; transition: 0.3s;">
-                                        <i class="bi bi-trash3" style="margin-right: 8px;"></i> Deletar
+                                <td class="text-center py-2">
+                                    <button data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                        onclick="setDeleteId('{{.Id}}')"
+                                        class="btn btn-sm d-inline-flex align-items-center gap-2"
+                                        style="background: #ef5350; color: white; border: none; padding: 6px 12px; border-radius: 8px;">
+                                        <i class="bi bi-trash3"></i> Deletar
                                     </button>
                                 </td>
                             </tr>
@@ -53,61 +53,62 @@
                 </div>
             </div>
 
-            <div class="card-footer text-center" 
-                 style="background: #10172b; border-top: 1px solid #1a2138; border-radius: 0 0 15px 15px;">
+            <div class="card-footer text-center"
+                style="background: #10172b; border-top: 1px solid #1a2138; border-radius: 0 0 15px 15px;">
                 <a href="/new" class="btn btn-lg d-inline-flex align-items-center gap-2"
-                   style="background: #4fc3f7; color: #0a0f1f; border: none; font-weight: 600; transition: 0.3s;">
-                    <i class="bi bi-plus-circle" style="margin-right: 8px;"></i> Criar novo produto
+                    style="background: #4fc3f7; color: #0a0f1f; border: none; font-weight: 600; padding: 10px 24px; border-radius: 10px;">
+                    <i class="bi bi-plus-circle"></i> Criar novo produto
                 </a>
             </div>
         </section>
     </div>
 
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: #0f1423; color: #f5f5f5; border-radius: 15px;">
+                <div class="modal-header" style="border-bottom: 1px solid #1a2138;">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmar exclusão</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja deletar este produto?
+                </div>
+                <div class="modal-footer" style="border-top: 1px solid #1a2138;">
+                    <button type="button" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Deletar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let deleteId = null;
+        function setDeleteId(id) { deleteId = id; }
+        document.getElementById("confirmDeleteBtn").addEventListener("click", function () {
+            if (deleteId) window.location = "/delete?id=" + deleteId;
+        });
+    </script>
+
     <style>
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-15px); }
-            to { opacity: 1; transform: translateY(0); }
+        .table-dark-custom th {
+            background-color: #1a2138;
+            color: #4fc3f7;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .table-dark-custom td {
+            background-color: #12192c;
+            color: #e3f2fd;
         }
 
-        .card {
-            animation: fadeIn 0.8s ease-in-out;
-        }
-
-        table tbody tr:hover {
+        .table-dark-custom tbody tr:hover {
             background: rgba(79, 195, 247, 0.08);
             transform: scale(1.01);
             cursor: pointer;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .btn:active {
-            transform: scale(0.97);
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
-            td, th { font-size: 0.9rem; }
-            .btn-sm { font-size: 0.85rem; }
+            transition: transform 0.2s, background 0.2s;
         }
     </style>
 
-    <script>
-        function onDelete(id) {
-            const confirmar = confirm("Tem certeza que deseja deletar este produto?");
-            if (confirmar) {
-                window.location = "/delete?id=" + id;
-            }
-        }
-    </script>
 </body>
 </html>
 {{end}}

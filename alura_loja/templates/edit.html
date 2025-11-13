@@ -1,16 +1,14 @@
 {{define "Edit"}}
-
 {{template "_head"}}
 {{template "_menu"}}
 
 <body style="background-color: #0a0f1f; font-family: 'Poppins', sans-serif; color: #f5f5f5;">
-
   <div class="container mt-5">
-    <div class="card border-0 shadow-lg overflow-hidden" style="border-radius: 15px; background: #10172b;">
+    <div class="card shadow-lg border-0 mb-5"
+      style="background-color: #0f1423; border-radius: 15px; border: 1px solid #1a2138;">
       <div class="row g-0">
-
         <div class="col-md-4 d-flex flex-column justify-content-center align-items-center text-center p-4"
-          style="background: #0f1423;">
+          style="background: #10172b;">
           <i class="bi bi-pencil-square" style="font-size: 4rem; color: #4fc3f7;"></i>
           <h2 class="fw-bold mt-3" style="color: #4fc3f7;">Editar Produto</h2>
           <p class="text-secondary mb-0" style="color: #a1b3c5;">Atualize os dados necessários<br>e salve as alterações
@@ -18,83 +16,108 @@
         </div>
 
         <div class="col-md-8 p-5">
-          <form method="POST" action="update">
+          <form method="POST" action="update" class="mx-auto" style="max-width: 700px;">
             <input type="hidden" name="id" value="{{.Id}}">
 
-            <div class="mb-3">
-              <label class="form-label d-flex align-items-center gap-2">
+            <div class="mb-4">
+              <label class="form-label fw-semibold d-flex align-items-center mb-2 text-white">
                 <i class="bi bi-tag" style="font-size: 1.2rem; color: #4fc3f7; margin-right: 8px;"></i>Nome
               </label>
-              <input type="text" name="nome" value="{{.Nome}}" class="form-control"
-                style="background-color: #1a2138; color: #f5f5f5; border: none;">
+              <input type="text" name="nome" value="{{.Nome}}" class="form-control form-control-lg"
+                style="background-color: #10172b; color: #f5f5f5; border: none; border-radius: 10px; padding: 14px 16px;">
             </div>
 
-            <div class="mb-3">
-              <label class="form-label d-flex align-items-center gap-2">
+            <div class="mb-4">
+              <label class="form-label fw-semibold d-flex align-items-center mb-2 text-white">
                 <i class="bi bi-card-text" style="font-size: 1.2rem; color: #4fc3f7; margin-right: 8px;"></i>Descrição
               </label>
-              <input type="text" name="descricao" value="{{.Descricao}}" class="form-control"
-                style="background-color: #1a2138; color: #f5f5f5; border: none;">
+              <input type="text" name="descricao" value="{{.Descricao}}" class="form-control form-control-lg"
+                style="background-color: #10172b; color: #f5f5f5; border: none; border-radius: 10px; padding: 14px 16px;">
             </div>
 
             <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label d-flex align-items-center gap-2">
+              <div class="col-sm-6 mb-4">
+                <label class="form-label fw-semibold d-flex align-items-center mb-2 text-white">
                   <i class="bi bi-cash" style="font-size: 1.2rem; color: #4fc3f7; margin-right: 8px;"></i>Preço
                 </label>
-                <input type="number" name="preco" value="{{.Preco}}" class="form-control" step="0.01"
-                  style="background-color: #1a2138; color: #f5f5f5; border: none;">
+                <input type="number" name="preco" value="{{.Preco}}" class="form-control form-control-lg" step="0.01"
+                  style="background-color: #10172b; color: #f5f5f5; border: none; border-radius: 10px; padding: 14px 16px;">
               </div>
-
-              <div class="col-md-6 mb-3">
-                <label class="form-label d-flex align-items-center gap-2">
+              <div class="col-sm-6 mb-4">
+                <label class="form-label fw-semibold d-flex align-items-center mb-2 text-white">
                   <i class="bi bi-archive" style="font-size: 1.2rem; color: #4fc3f7; margin-right: 8px;"></i>Quantidade
                 </label>
-                <input type="number" name="quantidade" value="{{.Quantidade}}" class="form-control"
-                  style="background-color: #1a2138; color: #f5f5f5; border: none;">
+                <input type="number" name="quantidade" value="{{.Quantidade}}" class="form-control form-control-lg"
+                  style="background-color: #10172b; color: #f5f5f5; border: none; border-radius: 10px; padding: 14px 16px;">
               </div>
             </div>
 
-            <div class="text-center mt-4 d-flex justify-content-center gap-3 flex-wrap">
-              <button type="submit" class="btn btn-lg btn-icon btn-custom"
-                style="background: #4fc3f7; color: #0a0f1f; border: none; font-weight: 600; border-radius: 10px; padding: 10px 24px; transition: 0.3s;">
+            <div class="text-center mt-5 d-flex justify-content-center flex-wrap gap-3">
+              <button type="submit" class="btn btn-lg btn-custom d-inline-flex align-items-center">
                 <i class="bi bi-check-circle"></i>
                 <span>Salvar alterações</span>
               </button>
-
-              <a href="/" class="btn btn-lg btn-icon btn-custom"
-                style="background: #3f51b5; color: white; border: none; font-weight: 600; border-radius: 10px; padding: 10px 24px; transition: 0.3s;">
+              <a href="/" class="btn btn-lg btn-custom btn-secondary-custom d-inline-flex align-items-center">
                 <i class="bi bi-arrow-left-circle"></i>
                 <span>Voltar</span>
               </a>
             </div>
-
           </form>
         </div>
-
       </div>
     </div>
   </div>
 
   <style>
-    .btn:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-
     .btn-custom {
+      background: #4fc3f7;
+      color: #0a0f1f;
+      border: none;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 12px 28px;
+      gap: 0.6rem;
+      min-width: 160px;
       margin-right: 15px;
+      transition: all 0.25s ease;
     }
 
-    .btn-icon {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    .btn-secondary-custom {
+      background: #3f51b5 !important;
+      color: #fff !important;
+      transition: all 0.25s ease;
+    }
+
+    .btn-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 195, 247, 0.4);
+    }
+
+    .btn-secondary-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(63, 81, 181, 0.4);
     }
 
     input:focus {
       outline: none !important;
-      box-shadow: 0 0 10px #4fc3f7;
+      box-shadow: 0 0 8px #4fc3f7;
+      background-color: #131a30 !important;
+    }
+
+    .card {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 768px) {
@@ -103,7 +126,6 @@
       }
     }
   </style>
-
 </body>
 
 </html>
