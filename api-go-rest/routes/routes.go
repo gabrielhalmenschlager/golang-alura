@@ -5,10 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/api-go-rest/controllers"
+	"github.com/gorilla/mux"
 )
 
 func HandleRequest() {
-	http.HandleFunc("/", controllers.Home)
-	http.HandleFunc("/personalidades", controllers.TodasPersonalidades)
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	r := mux.NewRouter()
+	r.HandleFunc("/", controllers.Home)
+	r.HandleFunc("/personalidades", controllers.TodasPersonalidades)
+	log.Fatal(http.ListenAndServe(":8000", r))
 }
