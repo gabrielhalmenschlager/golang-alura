@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/api-go-rest/database"
 	"github.com/gabrielhalmenschlager/curso-golang-alura/api-go-rest/models"
@@ -16,18 +15,15 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func TodasPersonalidades(w http.ResponseWriter, r *http.Request) {
-	var p []models.Personalidade
-	database.DB.Find(&p)
-	json.NewEncoder(w).Encode(p)
+	var personalidade []models.Personalidade
+	database.DB.Find(&personalidade)
+	json.NewEncoder(w).Encode(personalidade)
 }
 
 func RetornaUmaPersonalidade(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-
-	for _, personalidade := range models.Personalidades {
-		if strconv.Itoa(personalidade.Id) == id {
-			json.NewEncoder(w).Encode(personalidade)
-		}
-	}
+	var personalidade []models.Personalidade
+	database.DB.First(&personalidade, id)
+	json.NewEncoder(w).Encode(personalidade)
 }
