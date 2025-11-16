@@ -1,11 +1,13 @@
 package main
 
 import (
+	"github.com/gabrielhalmenschlager/curso-golang-alura/gin-api-rest/database"
 	"github.com/gabrielhalmenschlager/curso-golang-alura/gin-api-rest/models"
 	"github.com/gabrielhalmenschlager/curso-golang-alura/gin-api-rest/routes"
 )
 
 func main() {
+	database.ConectaComBancoDeDados()
 	models.Alunos = []models.Aluno{
 		{Nome: "Ana Silva", CPF: "123.456.789-00", RG: "12.345.678-9"},
 		{Nome: "Bruno Santos", CPF: "987.654.321-00", RG: "98.765.432-1"},
