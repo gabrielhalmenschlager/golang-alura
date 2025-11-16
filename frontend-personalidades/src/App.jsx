@@ -1,7 +1,7 @@
-import React from 'react';
 import './App.css';
 import logo from './assets/logo.svg';
 import logogo from './assets/logo-go.png';
+import Personalidades from './components/Personalidades';
 
 function App() {
   return (
@@ -11,6 +11,8 @@ function App() {
         <h1>Personalidades</h1>
         <img src={logo} className="App-logo" alt="React Logo" />
       </header>
+
+      <Personalidades />
     </div>
   );
 }

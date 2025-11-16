@@ -24,7 +24,7 @@ func TodasPersonalidades(w http.ResponseWriter, r *http.Request) {
 func RetornaUmaPersonalidade(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var personalidade []models.Personalidade
+	var personalidade models.Personalidade
 	database.DB.First(&personalidade, id)
 	json.NewEncoder(w).Encode(personalidade)
 }
@@ -39,7 +39,7 @@ func CriaUmaNovaPersonalidade(w http.ResponseWriter, r *http.Request) {
 func DeletaUmaPersonalidade(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var personalidade []models.Personalidade
+	var personalidade models.Personalidade
 	database.DB.Delete(&personalidade, id)
 	json.NewEncoder(w).Encode(personalidade)
 }
@@ -47,7 +47,7 @@ func DeletaUmaPersonalidade(w http.ResponseWriter, r *http.Request) {
 func EditaPersonalidade(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	var personalidade []models.Personalidade
+	var personalidade models.Personalidade
 	database.DB.First(&personalidade, id)
 	json.NewDecoder(r.Body).Decode(&personalidade)
 	database.DB.Save(&personalidade)
