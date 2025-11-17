@@ -26,3 +26,28 @@ func CreatePokemon(pokemon models.Pokemon) (models.Pokemon, error) {
 	result := database.DB.Create(&pokemon)
 	return pokemon, result.Error
 }
+
+func UpdatePokemon(id string, updatedData models.Pokemon) (models.Pokemon, error) {
+	var pokemon models.Pokemon
+	if err := database.DB.First(&pokemon, id).Error; err != nil {
+		return pokemon, errors.New("pokemon não encontrado")
+	}
+
+	pokemon.Name = updatedData.Name
+	pokemon.Type = updatedData.Type
+	pokemon.ImageURL = updatedData.ImageURL
+
+	if err := database.DB.Save(&pokemon).Error; err != nil {
+		return pokemon, errors.New("erro ao atualizar pokemon")
+	}
+
+	return pokemon, nil
+}
+
+func DeletePokemon(id string) error {
+	result := database.DB.Delete(&models.Pokemon{}, id)
+	if result.RowsAffected == 0 {
+		return errors.New("pokemon não encontrado")
+	}
+	return result.Error
+}

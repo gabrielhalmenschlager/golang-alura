@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #222;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.pokedex-container {
+    width: 100%;
+    max-width: 900px;
+    min-height: 700px;
+    background: #cc0000; 
+    border: 5px solid #333;
+    border-radius: 10px 10px 40px 10px;
+    padding: 25px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.pokedex-screen {
+    background: #98d8a8; 
+    border: 6px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.4);
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #333 #777;
+}
+
+.pokedex-screen::-webkit-scrollbar {
+    width: 12px;
+}
+.pokedex-screen::-webkit-scrollbar-track {
+    background: #777;
+    border-radius: 5px;
+}
+.pokedex-screen::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 6px;
+    border: 2px solid #777;
+}
+
+.page-title {
+    font-size: 1.2rem;
+    color: #333;
+    text-shadow: 1px 1px #777;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.empty-list-text {
+    font-size: 0.8rem;
+    color: #333;
+    text-align: center;
+    padding: 2rem;
+}
+
+.list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+.pokemon-card {
+    border: 3px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    background: #f0f0f0;
+    box-shadow: 3px 3px 0px #888;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    image-rendering: pixelated;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pokemon-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0px #888;
+}
+
+.pokemon-image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    background: #ddd;
+    border-radius: 5px;
+    border: 2px solid #aaa;
+    margin-bottom: 0.5rem;
+    align-self: center; 
+}
+
+.pokemon-card h3 {
+    font-size: 1rem;
+    color: #333;
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pokemon-type {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+    align-self: center; 
+}
+
+.btn {
+    padding: 0.5rem 0.8rem;
+    border: 2px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    box-shadow: 2px 2px 0px #555;
+    transition: all 0.1s ease;
+    width: 100%;
+    margin-top: 5px; 
+    text-decoration: none; 
+    text-align: center;
+    line-height: 1.5;
+}
+
+.btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.favorite-btn {
+    background: #ffd700;
+    color: #333;
+}
+
+.remove-btn {
+    background: #ee6352;
+    color: white;
+}
+
+.submit-btn {
+    background: #4caf50;
+    color: white;
+    width: 100%;
+}
+
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #333;
+}
+
+.pokedex-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.form-group input {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    padding: 10px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    background: #f0f0f0;
+    color: #333;
+}
+
+.form-group input:focus {
+    outline: none;
+    background: #fff;
+    box-shadow: 0 0 5px #ffd700;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.action-buttons .btn {
+    flex-grow: 1;
+    font-size: 0.7rem; 
+    padding: 0.4rem; 
+    margin-top: 0; 
+    white-space: nowrap; 
+}
+
+.edit-btn {
+    background: #007bff;
+    color: white;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+}
