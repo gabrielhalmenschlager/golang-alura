@@ -1,12 +1,14 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/api_rest_gin_go-aula_5/controllers"
 	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
 )
 
 func SetupDasRotasDeTeste() *gin.Engine {
@@ -24,7 +26,8 @@ func TestVerificaStatusCodeDaSaudacaoComParametro(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/gabe", nil)
 	resposta := httptest.NewRecorder()
 	r.ServeHTTP(resposta, req)
-	if resposta.Code != http.StatusOK {
-		t.Fatalf("Status error: valor recebido foi %d e o esperado era %d", resposta.Code, http.StatusOK)
-	}
+	assert.Equal(t, http.StatusOK, resposta.Code, "Deveriam ser iguais")
+	mockDaResposta := `{"API diz:":"E ai gabe, tudo beleza?"}`
+	respostaBody, _ := ioutil.ReadAll(resposta.Body)
+	assert.Equal(t, mockDaResposta, string(respostaBody))
 }
