@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -8,9 +9,12 @@ import (
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/api_rest_gin_go-aula_5/controllers"
 	"github.com/gabrielhalmenschlager/curso-golang-alura/api_rest_gin_go-aula_5/database"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/api_rest_gin_go-aula_5/models"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )
+
+var ID int
 
 func SetupDasRotasDeTeste() *gin.Engine {
 	rotas := gin.Default()
@@ -20,6 +24,17 @@ func SetupDasRotasDeTeste() *gin.Engine {
 // func TestFalhador(t *testing.T) {
 // 	t.Fatalf("Teste falhou de propósito, não se preocupe!")
 // }
+
+func CriaAlunoMock() {
+	aluno := models.Aluno{Nome: "Nome do Aluno Teste", CPF: "12345678901", RG: "123456789"}
+	database.DB.Create(&aluno)
+	ID = int(aluno.ID)
+}
+
+func DeletaAlunoMock() {
+	var aluno models.Aluno
+	database.DB.Delete(&aluno, ID)
+}
 
 func TestVerificaStatusCodeDaSaudacaoComParametro(t *testing.T) {
 	r := SetupDasRotasDeTeste()
@@ -35,10 +50,13 @@ func TestVerificaStatusCodeDaSaudacaoComParametro(t *testing.T) {
 
 func TestListandoTodosOsAlunosHandler(t *testing.T) {
 	database.ConectaComBancoDeDados()
+	CriaAlunoMock()
+	defer DeletaAlunoMock()
 	r := SetupDasRotasDeTeste()
 	r.GET("/alunos", controllers.ExibeTodosAlunos)
 	req, _ := http.NewRequest("GET", "/alunos", nil)
 	resposta := httptest.NewRecorder()
 	r.ServeHTTP(resposta, req)
 	assert.Equal(t, http.StatusOK, resposta.Code)
+	fmt.Println(resposta.Body)
 }
