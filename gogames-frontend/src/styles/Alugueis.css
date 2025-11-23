@@ -1,0 +1,214 @@
+/* src/styles/Alugueis.css (Estilo Retro Neon para Listagem de Aluguéis) */
+
+/* Importante: Replicar variáveis se não estiverem em um arquivo global */
+:root {
+    --color-bg-deep: #000D1A;
+    --color-text-primary: #E0E0E0;
+    --color-neon-pink: #FF00FF;
+    --color-neon-cyan: #00FFFF;
+    --color-neon-green: #39FF14;
+    --font-display: 'Press Start 2P', monospace;
+    --font-body: 'Space Mono', monospace;
+}
+
+.alugueis-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Título (Usando o estilo do Home.css: Press Start 2P e Glitch/Neon Pink) */
+.main-title.alugueis-arcade-title {
+    font-family: var(--font-display); 
+    font-size: clamp(2em, 5vw, 3.2em);
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--color-neon-pink); /* Cor principal em Pink */
+    letter-spacing: 2px;
+    text-shadow:
+        0 0 8px var(--color-neon-pink),
+        0 0 15px var(--color-neon-pink),
+        2px 2px 0px var(--color-neon-cyan); /* Usa Cyan como deslocamento */
+    animation: neon-glitch 1.5s infinite alternate; 
+}
+
+/* --- Estilo de Abas/Filtros --- */
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Mais espaçamento */
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.neon-tab {
+    background: none;
+    border: 1px solid #555;
+    padding: 10px 15px;
+    color: #999;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-shadow: none;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+}
+
+.neon-tab:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-neon-cyan);
+    box-shadow: 0 0 10px var(--color-neon-cyan);
+    background-color: rgba(0, 255, 255, 0.1);
+}
+
+.neon-tab.active-cyan {
+    border-color: var(--color-neon-cyan);
+    box-shadow: 0 0 10px var(--color-neon-cyan);
+    background-color: rgba(0, 255, 255, 0.2);
+    color: var(--color-neon-cyan);
+    text-shadow: 0 0 5px var(--color-neon-cyan);
+}
+.neon-tab.active-red {
+    border-color: var(--color-neon-pink); /* Usando Pink para Ativo para consistência */
+    box-shadow: 0 0 10px var(--color-neon-pink);
+    background-color: rgba(255, 0, 255, 0.2);
+    color: var(--color-neon-pink);
+    text-shadow: 0 0 5px var(--color-neon-pink);
+}
+.neon-tab.active-green {
+    border-color: var(--color-neon-green);
+    box-shadow: 0 0 10px var(--color-neon-green);
+    background-color: rgba(57, 255, 20, 0.2);
+    color: var(--color-neon-green);
+    text-shadow: 0 0 5px var(--color-neon-green);
+}
+
+.refresh-button {
+    color: #999;
+    border-color: #555;
+    /* Animação para o ícone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.refresh-button:hover {
+    color: var(--color-neon-pink);
+    border-color: var(--color-neon-pink);
+    box-shadow: 0 0 10px var(--color-neon-pink);
+    background-color: rgba(255, 0, 255, 0.1);
+}
+.spin {
+    animation: spin 1s infinite linear;
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* --- Estilo de Tabela Neon --- */
+.alugueis-table-wrapper {
+    overflow-x: auto;
+    background-color: rgba(20, 0, 40, 0.7);
+    border: 1px solid var(--color-neon-cyan);
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--color-neon-cyan);
+}
+
+.neon-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+}
+
+.neon-table th {
+    background-color: #1a012e;
+    color: var(--color-neon-cyan);
+    padding: 15px 10px;
+    text-align: left;
+    border-bottom: 2px solid var(--color-neon-pink);
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+.neon-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #333;
+    color: #ccc;
+    font-size: 0.95em;
+    vertical-align: middle;
+}
+
+.neon-table tbody tr:hover {
+    background-color: rgba(255, 0, 255, 0.1);
+}
+
+.active-row {
+    color: var(--color-text-primary);
+    background-color: rgba(255, 0, 255, 0.05); /* Leve destaque para ativos */
+}
+.inactive-row {
+    color: #999;
+    font-style: italic;
+}
+
+/* Status Pill */
+.status-pill {
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    color: #000; /* Texto preto para contraste no neon */
+}
+.status-alugado {
+    background-color: var(--color-neon-pink);
+    box-shadow: 0 0 5px var(--color-neon-pink);
+}
+.status-devolvido {
+    background-color: var(--color-neon-green);
+    box-shadow: 0 0 5px var(--color-neon-green);
+}
+
+/* Botão de Devolver */
+.neon-button-small.btn-devolver {
+    padding: 5px 10px;
+    border: 1px solid #ffaa00; /* Laranja/Amarelo para Devolver */
+    box-shadow: 0 0 5px #ffaa00;
+    color: #ffaa00;
+    font-family: var(--font-body);
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.neon-button-small.btn-devolver:hover {
+    background-color: #ffaa00;
+    color: var(--color-bg-deep);
+    box-shadow: 0 0 15px #ffaa00;
+}
+
+.devolvido-date {
+    font-size: 0.9em;
+    color: var(--color-neon-green);
+    font-weight: bold;
+}
+
+/* Estilos de Estado (Usados na Home, replicados aqui para consistência) */
+.loading-text { color: var(--color-neon-cyan); font-size: 2.5em; text-align: center; text-shadow: 0 0 15px var(--color-neon-cyan); animation: pulse-loading 1.5s infinite alternate; margin-top: 40px;}
+.error-text { color: #ff4d4d; text-shadow: 0 0 15px #ff0000; font-size: 2.5em; text-align: center; margin-top: 40px;}
+.neon-message { margin-top: 20px; font-size: 1.4em; color: var(--color-neon-cyan); text-shadow: 0 0 10px var(--color-neon-cyan);}
+
+/* Responsividade Básica */
+@media (max-width: 600px) {
+    .filter-tabs {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .neon-tab {
+        width: 100%;
+        text-align: center;
+    }
+    .main-title.alugueis-arcade-title {
+        font-size: 2em;
+    }
+}

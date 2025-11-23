@@ -1,0 +1,155 @@
+/* src/styles/Formulario.css (Estilo Retro Neon para Formulários) */
+
+/* Importante: Replicar variáveis se não estiverem em um arquivo global */
+:root {
+    --color-bg-deep: #000D1A;
+    --color-text-primary: #E0E0E0;
+    --color-neon-pink: #FF00FF;
+    --color-neon-cyan: #00FFFF;
+    --color-neon-green: #39FF14;
+    --font-display: 'Press Start 2P', monospace;
+    --font-body: 'Space Mono', monospace;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: var(--font-body); /* Corpo do texto em Space Mono */
+}
+
+/* Título Arcade Neon (Usando o estilo do Home.css: Press Start 2P e Glitch) */
+.main-title.form-arcade-title {
+    font-family: var(--font-display); 
+    font-size: clamp(1.8em, 4vw, 2.8em); /* Levemente menor que o título da Home */
+    text-align: center;
+    margin-bottom: 30px; 
+    color: var(--color-neon-cyan);
+    letter-spacing: 2px;
+    text-shadow:
+        0 0 8px var(--color-neon-cyan),
+        0 0 15px var(--color-neon-cyan),
+        2px 2px 0px var(--color-neon-pink); /* Usa Pink como deslocamento */
+    animation: neon-glitch 1.5s infinite alternate; /* Mantém a animação de glitch da Home */
+}
+
+/* Animação do Glitch (Deve estar em algum lugar global, mas replicada aqui para contexto) */
+/*
+@keyframes neon-glitch {
+    0% { transform: translate(0); text-shadow: 0 0 10px var(--color-neon-cyan), 0 0 20px var(--color-neon-cyan), 3px 3px 0 var(--color-neon-pink); }
+    100% { transform: translate(0.5px, -0.5px); text-shadow: 0 0 15px var(--color-neon-cyan), 0 0 25px var(--color-neon-cyan), -3px -3px 0 var(--color-neon-green); }
+}
+*/
+
+/* Container do Formulário */
+.neon-form {
+    background-color: rgba(20, 0, 40, 0.7); /* Fundo escuro */
+    border: 1px solid var(--color-neon-pink); /* Borda em Pink */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--color-neon-pink);
+    /* Removido flicker para evitar distração excessiva no formulário */
+}
+
+.neon-label {
+    display: block;
+    margin-bottom: 25px; /* Mais espaço para legibilidade */
+    font-weight: bold;
+    color: var(--color-neon-green); /* Rótulo em Verde Neon */
+    text-shadow: 0 0 5px var(--color-neon-green);
+    font-family: var(--font-body);
+}
+
+/* Estilo dos Inputs (Texto, Textarea, Select) */
+.neon-input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background-color: #0d0d1e; /* Fundo do input */
+    color: var(--color-text-primary); /* Texto do input claro */
+    border: 1px solid var(--color-neon-cyan);
+    border-radius: 4px;
+    box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.4); /* Sombra interna para profundidade */
+    transition: all 0.3s;
+    font-size: 1em;
+    font-family: var(--font-body);
+}
+
+.neon-input:focus {
+    outline: none;
+    border-color: var(--color-neon-pink); /* Foco em Pink */
+    box-shadow: 0 0 8px var(--color-neon-pink), 0 0 15px rgba(255, 0, 255, 0.4);
+    background-color: #1a012e; /* Levemente mais claro no foco */
+}
+
+.textarea-neon {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.select-neon {
+    appearance: none; 
+    /* Seta customizada em ciano neon */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%2300FFFF%22%20d%3D%22M6%209L0%203h12z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center; /* Ajusta a posição da seta */
+    padding-right: 40px;
+}
+
+/* Estilo do botão de submissão (Usando a classe global .neon-button + modificador) */
+.neon-button.btn-submit-green { 
+    /* Estilo do botão base já vem do global.css */
+    border-color: var(--color-neon-green); 
+    box-shadow: 0 0 10px var(--color-neon-green); 
+    color: var(--color-neon-green);
+    margin-top: 20px;
+    width: 100%;
+    font-family: var(--font-body);
+    font-weight: 700;
+}
+.neon-button.btn-submit-green:hover { 
+    background-color: var(--color-neon-green); 
+    color: var(--color-bg-deep); /* Inverte a cor de texto */
+    box-shadow: 0 0 20px var(--color-neon-green);
+}
+
+/* Botão de Cancelar/Voltar */
+.back-to-home {
+    margin-top: 20px;
+    width: 100%;
+    background: none;
+    border: 1px solid #555;
+    color: #999;
+    padding: 10px;
+    text-align: center;
+    font-family: var(--font-body);
+}
+
+.back-to-home:hover {
+    color: var(--color-neon-cyan);
+    border-color: var(--color-neon-cyan);
+    box-shadow: 0 0 10px var(--color-neon-cyan);
+    background-color: rgba(0, 255, 255, 0.1);
+}
+
+/* Estilos de Feedback (Mantidos do seu código) */
+.feedback-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    font-family: var(--font-body);
+}
+.feedback-message.success {
+    background-color: rgba(57, 255, 20, 0.15);
+    color: var(--color-neon-green);
+    border: 1px solid var(--color-neon-green);
+    text-shadow: 0 0 5px var(--color-neon-green);
+}
+.feedback-message.error {
+    background-color: rgba(255, 0, 0, 0.15);
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    text-shadow: 0 0 5px #ff4d4d;
+}
