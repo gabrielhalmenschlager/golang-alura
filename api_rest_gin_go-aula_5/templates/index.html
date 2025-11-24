@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/api_rest_gin_go-aula_5/assets/index.css">
     <title>Alunos</title>
 </head>
+
 <body>
-  <div class="widget-wrap">
-    <h1>API - Gin e Golang</h1>
-    <div class="widget-wrap">
+    <div class="container">
+
+        <div class="header">
+            <img src="https://golanggo.wordpress.com/wp-content/uploads/2016/05/gopher.png?w=220" class="logo-go">
+            <h1>API - Gin e Golang</h1>
+            <img src="https://raw.githubusercontent.com/gin-gonic/logo/master/color.png" class="logo-gin">
+        </div>
+
         <ul id="the-list">
             {{range .alunos}}
-            <li>{{.Nome}}</li>
-        {{end}}
+            <li>
+                <span class="nome">{{.Nome}}</span>
+                <span class="info">RG: {{.RG}} | CPF: {{.CPF}}</span>
+            </li>
+            {{end}}
         </ul>
-      </div>
+
+    </div>
 </body>
+
 </html>

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0a1a2a, #0f3b63);
+  color: #ffffff;
+}
+
+.container {
+  max-width: 700px;
+  margin: 80px auto;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+}
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+li:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.nome {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.info {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+  
+  .logo-go{
+    width: 65px;
+    height: auto;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+    transition: 0.3s;
+  }
+
+  .logo-gin {
+    width: 70px;
+    height: auto;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+    transition: 0.3s;
+  }
+  
+  .logo-go:hover,
+  .logo-gin:hover {
+    transform: scale(1.1);
+  }
+  
+  h1 {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+  }
+  
