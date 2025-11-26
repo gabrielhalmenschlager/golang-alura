@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"strconv"
+
 	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/models"
 	"github.com/gin-gonic/gin"
 )
@@ -15,6 +17,11 @@ func GetPizzas(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"pizzas": pizzas,
 	})
+}
+
+func GetPizzasByID(c *gin.Context) {
+	id := c.Params("id")
+	strconv.Atoi(id)
 }
 
 func PostPizzas(c *gin.Context) {
