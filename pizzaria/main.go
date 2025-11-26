@@ -5,9 +5,9 @@ import (
 )
 
 type Pizza struct {
-	ID    int
-	Nome  string
-	Preco float64
+	ID    int     `json:"id"`
+	Nome  string  `json:"nome"`
+	Preco float64 `json:"preco"`
 }
 
 func main() {
