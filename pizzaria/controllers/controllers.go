@@ -15,13 +15,26 @@ var pizzas []models.Pizza
 func LoadPizzas() {
 	file, err := os.Open("pizzaria/dados/pizzas.json")
 	if err != nil {
-		fmt.Println("Erro File:", err)
+		fmt.Println("Error File:", err)
 		return
 	}
 	defer file.Close()
 	decoder := json.NewDecoder(file)
 	if err := decoder.Decode(&pizzas); err != nil {
 		fmt.Println("Error Decoding JSON:", err)
+	}
+}
+
+func SavePizza() {
+	file, err := os.Create("pizzaria/dados/pizzas.json")
+	if err != nil {
+		fmt.Println("Error File:", err)
+		return
+	}
+	defer file.Close()
+	encoder := json.NewEncoder(file)
+	if err := encoder.Encode(pizzas); err != nil {
+		fmt.Println("Error Enconding JSON:", err)
 	}
 }
 
@@ -55,9 +68,12 @@ func PostPizzas(c *gin.Context) {
 	var newPizza models.Pizza
 	if err := c.ShouldBindJSON(&newPizza); err != nil {
 		c.JSON(400, gin.H{
-			"erro": err.Error(),
+			"error": err.Error(),
 		})
 		return
 	}
+	newPizza.ID = len(pizzas) + 1
 	pizzas = append(pizzas, newPizza)
+	SavePizza()
+	c.JSON(201, newPizza)
 }

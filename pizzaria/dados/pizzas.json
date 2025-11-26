@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "nome": "Frango com Catupiry",
+        "preco": 99.5
+    },
+    {
+        "id": 2,
+        "nome": "Toscana",
+        "preco": 99.5
+    }
+]
