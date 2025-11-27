@@ -49,7 +49,7 @@ func GetPizzaByID(c *gin.Context) {
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
 		c.JSON(400, gin.H{
-			"erro": err.Error(),
+			"error": err.Error(),
 		})
 		return
 	}
@@ -79,7 +79,22 @@ func PostPizza(c *gin.Context) {
 }
 
 func UpdatePizza(c *gin.Context) {
-	c.JSON(200, gin.H{"method": "put"})
+	idParam := c.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	for i, p := range pizzas {
+		if p.ID == id {
+			pizzas = append(pizzas[:i], pizzas[i+1:]...)
+			SavePizza()
+			c.JSON(200, gin.H{"message": "Pizza Deleted"})
+		}
+	}
+	c.JSON(404, gin.H{"message": "Pizza Not Found"})
 }
 
 func DeletePizzaByID(c *gin.Context) {
