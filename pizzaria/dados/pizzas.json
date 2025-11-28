@@ -1,1 +1,23 @@
-[{"id":1,"nome":"Frango com Catupiry","preco":99.5,"reviews":[{"rating":5,"comment":"Melhor pizza da vida"},{"rating":5,"comment":"Pizza mais ou menos"}]},{"id":2,"nome":"Toscana","preco":99.5,"reviews":null}]
+[
+    {
+        "id": 1,
+        "nome": "Frango com Catupiry",
+        "preco": 99.5,
+        "reviews": [
+            {
+                "rating": 5,
+                "comment": "Melhor pizza da vida"
+            },
+            {
+                "rating": 3,
+                "comment": "Pizza mais ou menos"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "nome": "Toscana",
+        "preco": 99.5,
+        "reviews": null
+    }
+]

@@ -6,6 +6,7 @@ import (
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/data"
 	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/models"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/pizzaria/internal/service"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +18,10 @@ func PostReview(c *gin.Context) {
 	}
 	var newReview models.Review
 	if err := c.ShouldBindJSON(&newReview); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if err := service.ValidateReviewRating(newReview); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
