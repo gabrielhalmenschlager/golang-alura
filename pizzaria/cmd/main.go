@@ -14,5 +14,6 @@ func main() {
 	router.POST("/pizzas", handler.PostPizza)
 	router.PUT("/pizzas/:id", handler.UpdatePizza)
 	router.DELETE("/pizzas/:id", handler.DeletePizzaByID)
+	router.POST("pizzas/:id/reviews", handler.PostReview)
 	router.Run()
 }
