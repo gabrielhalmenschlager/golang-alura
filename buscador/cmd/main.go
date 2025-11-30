@@ -15,8 +15,13 @@ func main() {
 	wg.Add(3)
 
 	go func() {
+		var totalPrice float64
+		countPrices := 0.0
 		for price := range priceChannel {
-			fmt.Printf("Preço recebido: R$ %.2f \n", price)
+			totalPrice += price
+			countPrices++
+			avgPrice := totalPrice / countPrices
+			fmt.Printf("Preço recebido: R$ %.2f | Preço até agora: R$ %.2f \n", price, avgPrice)
 		}
 	}()
 
