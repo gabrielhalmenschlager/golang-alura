@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sync"
 	"time"
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/buscador/internal/fetcher"
@@ -11,18 +10,14 @@ import (
 
 func main() {
 	start := time.Now()
-	priceChannel := make(chan float64)
-	var showWg sync.WaitGroup
-	showWg.Add(1)
 
-	go func() {
-		defer showWg.Done()
-		processor.ShowPriceAVG(priceChannel)
-	}()
+	priceChannel := make(chan float64)
+	done := make(chan bool)
 
 	go fetcher.FetchPrices(priceChannel)
+	go processor.ShowPriceAVG(priceChannel, done)
 
-	showWg.Wait()
+	<-done
 
 	fmt.Printf("\nTempo total: %s", time.Since(start))
 }
