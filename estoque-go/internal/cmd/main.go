@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Sistema de Estoque")
+	fmt.Println("===== Sistema de Estoque =====")
 	estoque := services.NewEstoque()
 	itens := []models.Item{
 		{ID: 1, Name: "Item 1", Quantity: 5, Price: 19.99},
@@ -22,8 +22,14 @@ func main() {
 			continue
 		}
 	}
-	fmt.Println(estoque)
 	for _, item := range estoque.ListItens() {
 		fmt.Printf("\n ID: %d | Item: %s | Quantidade: %d | Preço %.2f", item.ID, item.Name, item.Quantity, item.Price)
+	}
+
+	fmt.Println()
+
+	logs := estoque.ViewAuditLog()
+	for _, log := range logs {
+		fmt.Printf("\n[%s] Ação: %s - Usuário: %s - Item ID: %d - Quantidade: %d - Motivo: %s", log.Timestamp.Format("01/02 15:04:05"), log.Action, log.User, log.ItemID, log.Quantity, log.Reason)
 	}
 }

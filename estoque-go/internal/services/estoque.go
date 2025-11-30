@@ -49,3 +49,7 @@ func (e *Estoque) ListItens() []models.Item {
 	}
 	return itemList
 }
+
+func (e *Estoque) ViewAuditLog() []models.Log {
+	return e.logs
+}
