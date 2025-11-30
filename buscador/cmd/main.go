@@ -5,13 +5,14 @@ import (
 	"time"
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/buscador/internal/fetcher"
+	"github.com/gabrielhalmenschlager/curso-golang-alura/buscador/internal/models"
 	"github.com/gabrielhalmenschlager/curso-golang-alura/buscador/internal/processor"
 )
 
 func main() {
 	start := time.Now()
 
-	priceChannel := make(chan float64)
+	priceChannel := make(chan models.PriceDetail)
 	done := make(chan bool)
 
 	go fetcher.FetchPrices(priceChannel)
