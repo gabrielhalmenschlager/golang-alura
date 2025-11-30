@@ -30,3 +30,11 @@ func (e *Estoque) AddItem(item models.Item) error {
 	e.items[strconv.Itoa(item.ID)] = item
 	return nil
 }
+
+func (e *Estoque) ListItens() []models.Item {
+	var itemList []models.Item
+	for _, item := range e.items {
+		itemList = append(itemList, item)
+	}
+	return itemList
+}

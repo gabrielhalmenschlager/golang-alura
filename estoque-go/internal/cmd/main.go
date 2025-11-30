@@ -23,4 +23,7 @@ func main() {
 		}
 	}
 	fmt.Println(estoque)
+	for _, item := range estoque.ListItens() {
+		fmt.Printf("\n ID: %d | Item: %s | Quantidade: %d | Preço %.2f", item.ID, item.Name, item.Quantity, item.Price)
+	}
 }
