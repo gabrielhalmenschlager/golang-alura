@@ -3,6 +3,7 @@ package services
 import (
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/gabrielhalmenschlager/curso-golang-alura/estoque-go/internal/models"
 )
@@ -19,7 +20,7 @@ func NewEstoque() *Estoque {
 	}
 }
 
-func (e *Estoque) AddItem(item models.Item) error {
+func (e *Estoque) AddItem(item models.Item, user string) error {
 	if item.Quantity <= 0 {
 		return fmt.Errorf("erro ao adicionar item: [ID:%d] possui uma quantidade inválida (zero ou negativa)", item.ID)
 	}
@@ -28,6 +29,16 @@ func (e *Estoque) AddItem(item models.Item) error {
 		item.Quantity += existingItem.Quantity
 	}
 	e.items[strconv.Itoa(item.ID)] = item
+
+	e.logs = append(e.logs, models.Log{
+		Timestamp: time.Now(),
+		Action:    "Entrada de estoque",
+		User:      user,
+		ItemID:    item.ID,
+		Quantity:  item.Quantity,
+		Reason:    "Adicionando novos itens no estoque",
+	})
+
 	return nil
 }
 
