@@ -37,12 +37,14 @@ func main() {
 		fmt.Printf("\n[%s] Ação: %s - Usuário: %s - Item ID: %d - Quantidade: %d - Motivo: %s", log.Timestamp.Format("01/02 15:04:05"), log.Action, log.User, log.ItemID, log.Quantity, log.Reason)
 	}
 
-	itemByName, err := services.FindByName(itens, "Item 3")
+	itemParaBuscar, err := services.FindBy(itens, func(item models.Item) bool {
+		return item.Price > 12
+	})
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	fmt.Println()
 
-	fmt.Println(itemByName)
+	fmt.Println("Item encontrado: ", itemParaBuscar)
 }
