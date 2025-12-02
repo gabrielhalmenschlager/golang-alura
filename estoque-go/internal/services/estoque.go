@@ -94,3 +94,16 @@ func (e *Estoque) RemoveItem(itemID int, quantity int, user string) error {
 
 	return nil
 }
+
+func FindByName(data []models.Item, name string) ([]models.Item, error) {
+	var result []models.Item
+	for _, item := range data {
+		if item.Name == name {
+			result = append(result, item)
+		}
+	}
+	if len(result) == 0 {
+		return nil, fmt.Errorf("nenhum item com o nome '%s' foi encontrado", name)
+	}
+	return result, nil
+}

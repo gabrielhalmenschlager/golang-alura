@@ -36,4 +36,13 @@ func main() {
 	for _, log := range logs {
 		fmt.Printf("\n[%s] Ação: %s - Usuário: %s - Item ID: %d - Quantidade: %d - Motivo: %s", log.Timestamp.Format("01/02 15:04:05"), log.Action, log.User, log.ItemID, log.Quantity, log.Reason)
 	}
+
+	itemByName, err := services.FindByName(itens, "Item 3")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println()
+
+	fmt.Println(itemByName)
 }
