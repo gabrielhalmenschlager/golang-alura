@@ -1,6 +1,6 @@
 package models
 
-type Iten struct {
+type Item struct {
 	Id         uint    `gorm:"primaryKey" json:"id"`
 	Nome       string  `json:"nome"`
 	Codigo     string  `gorm:"unique" json:"codigo"`

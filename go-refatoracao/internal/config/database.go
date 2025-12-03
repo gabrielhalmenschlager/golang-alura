@@ -20,6 +20,6 @@ func ConnectDatabase() {
 	DB = db
 
 	// AutoMigrate para criar/ajustar tabelas
-	DB.AutoMigrate(&models.Iten{})
-	DB.AutoMigrate(&models.Cat{})
+	DB.AutoMigrate(&models.Item{})
+	DB.AutoMigrate(&models.Categoria{})
 }

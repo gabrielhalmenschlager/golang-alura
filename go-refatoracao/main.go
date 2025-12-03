@@ -49,7 +49,7 @@ func listItensHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	var itens []models.Iten
+	var itens []models.Item
 	if err := config.DB.Find(&itens).Error; err != nil {
 		http.Error(w, "Erro ao buscar itens", http.StatusInternalServerError)
 		return
@@ -74,7 +74,7 @@ func getItenHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "ID inválido", http.StatusBadRequest)
 		return
 	}
-	var item models.Iten
+	var item models.Item
 	if err := config.DB.First(&item, id).Error; err != nil {
 		http.Error(w, "Item não encontrado", http.StatusNotFound)
 		return
@@ -94,7 +94,7 @@ func getItenByCodigoHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Código não fornecido", http.StatusBadRequest)
 		return
 	}
-	var item models.Iten
+	var item models.Item
 	// Busca o item onde o campo "codigo" é igual ao valor fornecido
 	if err := config.DB.Where("codigo = ?", cod).First(&item).Error; err != nil {
 		http.Error(w, "Item não encontrado", http.StatusNotFound)
@@ -110,7 +110,7 @@ func createItenHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	var item models.Iten
+	var item models.Item
 	if err := json.NewDecoder(r.Body).Decode(&item); err != nil {
 		http.Error(w, "Erro ao decodificar o item", http.StatusBadRequest)
 		return
@@ -129,7 +129,7 @@ func updateItenHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	var item models.Iten
+	var item models.Item
 	if err := json.NewDecoder(r.Body).Decode(&item); err != nil {
 		http.Error(w, "Erro ao decodificar o item", http.StatusBadRequest)
 		return
@@ -157,7 +157,7 @@ func deleteItenHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "ID inválido", http.StatusBadRequest)
 		return
 	}
-	if err := config.DB.Delete(&models.Iten{}, id).Error; err != nil {
+	if err := config.DB.Delete(&models.Item{}, id).Error; err != nil {
 		http.Error(w, "Erro ao deletar o item", http.StatusInternalServerError)
 		return
 	}
@@ -173,12 +173,12 @@ func listCategoriasHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	var cats []models.Cat
-	if err := config.DB.Find(&cats).Error; err != nil {
+	var categorias []models.Categoria
+	if err := config.DB.Find(&categorias).Error; err != nil {
 		http.Error(w, "Erro ao buscar categorias", http.StatusInternalServerError)
 		return
 	}
-	json.NewEncoder(w).Encode(cats)
+	json.NewEncoder(w).Encode(categorias)
 }
 
 // Buscar uma única categoria pelo id (via query string: ?id=1)
@@ -198,12 +198,12 @@ func getCategoriaHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "ID inválido", http.StatusBadRequest)
 		return
 	}
-	var cat models.Cat
-	if err := config.DB.First(&cat, id).Error; err != nil {
+	var categoria models.Categoria
+	if err := config.DB.First(&categoria, id).Error; err != nil {
 		http.Error(w, "Categoria não encontrada", http.StatusNotFound)
 		return
 	}
-	json.NewEncoder(w).Encode(cat)
+	json.NewEncoder(w).Encode(categoria)
 }
 
 // Criar uma nova categoria (envie JSON via POST)
@@ -213,16 +213,16 @@ func createCategoriaHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	var cat models.Cat
-	if err := json.NewDecoder(r.Body).Decode(&cat); err != nil {
+	var categoria models.Categoria
+	if err := json.NewDecoder(r.Body).Decode(&categoria); err != nil {
 		http.Error(w, "Erro ao decodificar a categoria", http.StatusBadRequest)
 		return
 	}
-	if err := config.DB.Create(&cat).Error; err != nil {
+	if err := config.DB.Create(&categoria).Error; err != nil {
 		http.Error(w, "Erro ao criar a categoria", http.StatusInternalServerError)
 		return
 	}
-	json.NewEncoder(w).Encode(cat)
+	json.NewEncoder(w).Encode(categoria)
 }
 
 // Atualizar uma categoria (envie JSON via PUT, com o campo id preenchido)
@@ -232,16 +232,16 @@ func updateCategoriaHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	var cat models.Cat
-	if err := json.NewDecoder(r.Body).Decode(&cat); err != nil {
+	var categoria models.Categoria
+	if err := json.NewDecoder(r.Body).Decode(&categoria); err != nil {
 		http.Error(w, "Erro ao decodificar a categoria", http.StatusBadRequest)
 		return
 	}
-	if err := config.DB.Save(&cat).Error; err != nil {
+	if err := config.DB.Save(&categoria).Error; err != nil {
 		http.Error(w, "Erro ao atualizar a categoria", http.StatusInternalServerError)
 		return
 	}
-	json.NewEncoder(w).Encode(cat)
+	json.NewEncoder(w).Encode(categoria)
 }
 
 // Deletar uma categoria (via query string: ?id=1)
@@ -260,7 +260,7 @@ func deleteCategoriaHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "ID inválido", http.StatusBadRequest)
 		return
 	}
-	if err := config.DB.Delete(&models.Cat{}, id).Error; err != nil {
+	if err := config.DB.Delete(&models.Categoria{}, id).Error; err != nil {
 		http.Error(w, "Erro ao deletar a categoria", http.StatusInternalServerError)
 		return
 	}
