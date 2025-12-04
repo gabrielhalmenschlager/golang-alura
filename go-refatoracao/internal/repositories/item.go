@@ -12,9 +12,9 @@ func NewItemRepository() *ItemRepository {
 }
 
 func (r *ItemRepository) ListAll() ([]models.Item, error) {
-	var items []models.Item
-	if err := config.DB.Find(&items).Error; err != nil {
+	var itens []models.Item
+	if err := config.DB.Find(&itens).Error; err != nil {
 		return nil, err
 	}
-	return items, nil
+	return itens, nil
 }

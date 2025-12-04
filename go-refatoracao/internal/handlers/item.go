@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"myapi/internal/config"
 	"myapi/internal/models"
+	"myapi/internal/repositories"
 	"myapi/internal/services"
 	"net/http"
 	"strconv"
@@ -18,9 +19,10 @@ func ListItensHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
-	var itens []models.Item
-	if err := config.DB.Find(&itens).Error; err != nil {
-		http.Error(w, "Erro ao buscar itens", http.StatusInternalServerError)
+	repository := repositories.NewItemRepository()
+	itens, err := repository.ListAll()
+	if err != nil {
+		http.Error(w, "erro ao listar os itens", http.StatusNotFound)
 		return
 	}
 	json.NewEncoder(w).Encode(itens)
