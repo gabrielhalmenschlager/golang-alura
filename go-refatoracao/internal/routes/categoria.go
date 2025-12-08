@@ -7,9 +7,9 @@ import (
 )
 
 func CategoriaRoutes(r *mux.Router) {
-	r.HandleFunc("/categorias", handlers.ListCategoriasHandler).Methods("GET")
-	r.HandleFunc("/categorias/get", handlers.GetCategoriaHandler).Methods("GET")
-	r.HandleFunc("/categorias/create", handlers.CreateCategoriaHandler)
-	r.HandleFunc("/categorias/update", handlers.UpdateCategoriaHandler)
-	r.HandleFunc("/categorias/delete", handlers.DeleteCategoriaHandler)
+	r.HandleFunc("/api/categorias", handlers.ListCategoriasHandler).Methods("GET")
+	r.HandleFunc("/api/categorias/{id}", handlers.GetCategoriaHandler).Methods("GET")
+	r.HandleFunc("/api/categorias", handlers.CreateCategoriaHandler).Methods("POST")
+	r.HandleFunc("/api/categorias", handlers.UpdateCategoriaHandler).Methods("PUT")
+	r.HandleFunc("/api/categorias/{id}", handlers.DeleteCategoriaHandler).Methods("DELETE")
 }

@@ -6,17 +6,11 @@ import (
 	"myapi/internal/models"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
-// ==================== HANDLERS PARA CATEGORIAS ====================
-
-// Listar todas as categorias
 func ListCategoriasHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
-		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
 	var categorias []models.Categoria
 	if err := config.DB.Find(&categorias).Error; err != nil {
 		http.Error(w, "Erro ao buscar categorias", http.StatusInternalServerError)
@@ -25,14 +19,9 @@ func ListCategoriasHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(categorias)
 }
 
-// Buscar uma única categoria pelo id (via query string: ?id=1)
 func GetCategoriaHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
-		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
-	idStr := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	idStr := vars["id"]
 	if idStr == "" {
 		http.Error(w, "ID não fornecido", http.StatusBadRequest)
 		return
@@ -50,13 +39,7 @@ func GetCategoriaHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(categoria)
 }
 
-// Criar uma nova categoria (envie JSON via POST)
 func CreateCategoriaHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
 	var categoria models.Categoria
 	if err := json.NewDecoder(r.Body).Decode(&categoria); err != nil {
 		http.Error(w, "Erro ao decodificar a categoria", http.StatusBadRequest)
@@ -69,13 +52,7 @@ func CreateCategoriaHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(categoria)
 }
 
-// Atualizar uma categoria (envie JSON via PUT, com o campo id preenchido)
 func UpdateCategoriaHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "PUT" {
-		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
-		return
-	}
-	w.Header().Set("Content-Type", "application/json")
 	var categoria models.Categoria
 	if err := json.NewDecoder(r.Body).Decode(&categoria); err != nil {
 		http.Error(w, "Erro ao decodificar a categoria", http.StatusBadRequest)
@@ -88,13 +65,9 @@ func UpdateCategoriaHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(categoria)
 }
 
-// Deletar uma categoria (via query string: ?id=1)
 func DeleteCategoriaHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "DELETE" {
-		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
-		return
-	}
-	idStr := r.URL.Query().Get("id")
+	vars := mux.Vars(r)
+	idStr := vars["id"]
 	if idStr == "" {
 		http.Error(w, "ID não fornecido", http.StatusBadRequest)
 		return

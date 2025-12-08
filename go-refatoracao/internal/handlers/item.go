@@ -12,11 +12,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// ==================== HANDLERS PARA ITENS ====================
-
-// Listar todos os itens
 func ListItens(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	repository := repositories.NewItemRepository()
 	itens, err := repository.ListAll()
 	if err != nil {
@@ -26,9 +22,7 @@ func ListItens(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(itens)
 }
 
-// Buscar um único item pelo id (via query string: ?id=1)
 func GetItem(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
 	idStr := vars["id"]
 	if idStr == "" {
@@ -48,9 +42,7 @@ func GetItem(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(item)
 }
 
-// Buscar um item pelo campo "codigo"
 func GetItenByCode(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
 	cod := vars["codigo"]
 	if cod == "" {
@@ -58,7 +50,6 @@ func GetItenByCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var item models.Item
-	// Busca o item onde o campo "codigo" é igual ao valor fornecido
 	if err := config.DB.Where("codigo = ?", cod).First(&item).Error; err != nil {
 		http.Error(w, "Item não encontrado", http.StatusNotFound)
 		return
@@ -66,9 +57,7 @@ func GetItenByCode(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(item)
 }
 
-// Criar um novo item (envie JSON via POST)
 func CreateItem(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	var item models.Item
 	if err := json.NewDecoder(r.Body).Decode(&item); err != nil {
 		http.Error(w, "Erro ao decodificar o item", http.StatusBadRequest)
@@ -86,9 +75,7 @@ func CreateItem(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(createdItem)
 }
 
-// Atualizar um item (envie JSON via PUT, com o campo id preenchido)
 func UpdateItem(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	var item models.Item
 	if err := json.NewDecoder(r.Body).Decode(&item); err != nil {
 		http.Error(w, "Erro ao decodificar o item", http.StatusBadRequest)
@@ -101,7 +88,6 @@ func UpdateItem(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(item)
 }
 
-// Deletar um item (via query string: ?id=1)
 func DeleteItem(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	idStr := vars["id"]
